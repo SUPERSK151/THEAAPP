@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diamond Health — Your online health shop</title>
+  <meta name="description" content="Diamond Health: vitamins, wellness, skin care and everyday health essentials delivered across South Africa.">
+  <link rel="icon" href="/img/logo.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="topbar">Free delivery on orders over R500 · Delivering across South Africa</div>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="#shop" class="brand"><img src="/img/logo.svg" alt="" width="34" height="34"><span>Diamond <b>Health</b></span></a>
+      <div class="search"><input id="search" type="search" placeholder="Search vitamins, skin care, first aid…" aria-label="Search products"></div>
+      <nav class="header-actions">
+        <button id="accountBtn" class="link-btn">Sign in</button>
+        <button id="cartBtn" class="cart-btn" aria-label="Open cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          <span id="cartCount">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- SHOP -->
+  <main id="view-shop" class="view">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <h1>Everyday health, delivered.</h1>
+          <p>Vitamins, wellness, skin care and family health essentials from Diamond Health, sent straight to your door.</p>
+          <a href="#products" class="btn btn-primary">Shop now</a>
+        </div>
+        <ul class="hero-points">
+          <li><b>Pharmacist support</b><span>Questions about a product? Ask us.</span></li>
+          <li><b>Secure accounts</b><span>Your details are protected under POPIA.</span></li>
+          <li><b>Fast delivery</b><span>Nationwide courier, 2–4 working days.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap" id="products">
+      <div class="chips" id="categories"></div>
+      <div class="grid" id="productGrid"></div>
+      <p id="emptyMsg" class="muted center" hidden>No products match your search.</p>
+    </section>
+  </main>
+
+  <!-- ACCOUNT -->
+  <main id="view-account" class="view" hidden>
+    <section class="wrap narrow">
+      <h1>My account</h1>
+      <p class="muted">Keep your details up to date so we can deliver your orders.</p>
+      <form id="profileForm" class="card form">
+        <h2>Personal details</h2>
+        <div class="row">
+          <label>First name<input name="first_name" required></label>
+          <label>Last name<input name="last_name" required></label>
+        </div>
+        <div class="row">
+          <label>Email<input name="email" disabled></label>
+          <label>Phone<input name="phone" type="tel" placeholder="e.g. 082 123 4567"></label>
+        </div>
+        <label>Date of birth<input name="date_of_birth" type="date"></label>
+        <h2>Delivery address</h2>
+        <label>Street address<input name="address_line1"></label>
+        <label>Complex / building (optional)<input name="address_line2"></label>
+        <div class="row">
+          <label>Suburb<input name="suburb"></label>
+          <label>City / town<input name="city"></label>
+        </div>
+        <div class="row">
+          <label>Province
+            <select name="province">
+              <option value="">Select…</option>
+              <option>Eastern Cape</option><option>Free State</option><option>Gauteng</option>
+              <option>KwaZulu-Natal</option><option>Limpopo</option><option>Mpumalanga</option>
+              <option>North West</option><option>Northern Cape</option><option>Western Cape</option>
+            </select>
+          </label>
+          <label>Postal code<input name="postal_code" inputmode="numeric" maxlength="4"></label>
+        </div>
+        <label class="check"><input type="checkbox" name="marketing_opt_in"> Send me specials and health tips by email</label>
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Save details</button>
+          <span id="profileMsg" class="msg"></span>
+        </div>
+      </form>
+
+      <div class="card">
+        <h2>My orders</h2>
+        <div id="ordersList" class="muted">No orders yet.</div>
+      </div>
+
+      <div class="card danger-zone">
+        <h2>Privacy</h2>
+        <p class="muted">You can sign out, or ask us to delete your personal information. Order records are kept for legal and tax purposes with your personal details removed.</p>
+        <div class="form-actions">
+          <button id="logoutBtn" class="btn">Sign out</button>
+          <button id="deleteBtn" class="btn btn-danger">Delete my details</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <div><b>Diamond Health</b><br><span class="muted">diamondhealth.co.za</span></div>
+      <div><a href="/privacy">Privacy notice (POPIA)</a><br><a href="mailto:hello@diamondhealth.co.za">hello@diamondhealth.co.za</a></div>
+      <div class="muted small">Information on this site is not a substitute for advice from a doctor or pharmacist. Always read the label.</div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <div id="overlay" class="overlay" hidden></div>
+  <aside id="cart" class="drawer" aria-label="Shopping cart" hidden>
+    <div class="drawer-head"><h2>Your cart</h2><button class="x" data-close>&times;</button></div>
+    <div id="cartItems" class="drawer-body"></div>
+    <div class="drawer-foot">
+      <div class="sum"><span>Subtotal</span><b id="cartSubtotal">R0.00</b></div>
+      <div class="sum muted small"><span>Delivery</span><span id="cartDelivery">—</span></div>
+      <div class="sum total"><span>Total</span><b id="cartTotal">R0.00</b></div>
+      <button id="checkoutBtn" class="btn btn-primary btn-block">Checkout</button>
+    </div>
+  </aside>
+
+  <!-- AUTH MODAL -->
+  <div id="authModal" class="modal" hidden role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button class="x" data-close>&times;</button>
+      <div class="tabs">
+        <button class="tab active" data-tab="login">Sign in</button>
+        <button class="tab" data-tab="register">Create account</button>
+      </div>
+      <form id="loginForm" class="form">
+        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Password<input name="password" type="password" required autocomplete="current-password"></label>
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        <p class="msg" id="loginMsg"></p>
+      </form>
+      <form id="registerForm" class="form" hidden>
+        <div class="row">
+          <label>First name<input name="first_name" required autocomplete="given-name"></label>
+          <label>Last name<input name="last_name" required autocomplete="family-name"></label>
+        </div>
+        <label>Email<input name="email" type="email" required autocomplete="email"></label>
+        <label>Phone<input name="phone" type="tel" placeholder="e.g. 082 123 4567" autocomplete="tel"></label>
+        <label>Password (min. 8 characters)<input name="password" type="password" minlength="8" required autocomplete="new-password"></label>
+        <label class="check"><input type="checkbox" name="popia_consent" required> I agree that Diamond Health may store and use my details to process my orders, as set out in the <a href="/privacy" target="_blank">privacy notice</a>.</label>
+        <label class="check"><input type="checkbox" name="marketing_opt_in"> Send me specials and health tips by email (optional)</label>
+        <button class="btn btn-primary btn-block" type="submit">Create account</button>
+        <p class="msg" id="registerMsg"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" class="modal" hidden role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button class="x" data-close>&times;</button>
+      <h2>Checkout</h2>
+      <div id="checkoutBody"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/app.js"></script>
+</body>
+</html>
