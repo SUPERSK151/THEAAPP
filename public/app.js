@@ -28,14 +28,14 @@ function toast(msg) {
 
 // ---------- Category icons (used when a product has no image) ----------
 const ICONS = {
-  'Vitamins & Supplements': '<rect x="14" y="22" width="36" height="20" rx="10" fill="#0f766e"/><rect x="32" y="22" width="18" height="20" rx="0" fill="#5eead4"/><rect x="14" y="22" width="36" height="20" rx="10" fill="none" stroke="#0f766e" stroke-width="3"/>',
-  'Pain & Fever': '<circle cx="32" cy="32" r="18" fill="#fff" stroke="#0f766e" stroke-width="3"/><path d="M18 32h28" stroke="#0f766e" stroke-width="3"/>',
-  'Cold & Flu': '<path d="M32 12v40M14 22l36 20M50 22L14 42" stroke="#0f766e" stroke-width="3.5" stroke-linecap="round"/>',
-  'Skin Care': '<rect x="22" y="20" width="20" height="32" rx="5" fill="#fff" stroke="#0f766e" stroke-width="3"/><rect x="26" y="12" width="12" height="8" rx="2" fill="#0f766e"/>',
-  'Baby & Mom': '<circle cx="32" cy="28" r="12" fill="#fff" stroke="#0f766e" stroke-width="3"/><path d="M20 52c2-8 22-8 24 0" stroke="#0f766e" stroke-width="3" fill="none"/>',
-  'Medical Devices': '<path d="M10 34h12l5-12 8 22 5-10h14" stroke="#0f766e" stroke-width="3.5" fill="none" stroke-linejoin="round"/>',
-  'First Aid': '<rect x="12" y="18" width="40" height="30" rx="5" fill="#fff" stroke="#0f766e" stroke-width="3"/><path d="M28 26h8v4h4v8h-4v4h-8v-4h-4v-8h4z" fill="#0f766e"/>',
-  'Prescription': '<rect x="16" y="12" width="32" height="40" rx="4" fill="#fff" stroke="#0f766e" stroke-width="3"/><text x="32" y="40" font-size="16" font-weight="700" text-anchor="middle" fill="#0f766e" font-family="sans-serif">Rx</text>',
+  'Vitamins & Supplements': '<rect x="14" y="22" width="36" height="20" rx="10" fill="#10263a"/><rect x="32" y="22" width="18" height="20" rx="0" fill="#cfe6df"/><rect x="14" y="22" width="36" height="20" rx="10" fill="none" stroke="#10263a" stroke-width="3"/>',
+  'Pain & Fever': '<circle cx="32" cy="32" r="18" fill="#fff" stroke="#10263a" stroke-width="3"/><path d="M18 32h28" stroke="#10263a" stroke-width="3"/>',
+  'Cold & Flu': '<path d="M32 12v40M14 22l36 20M50 22L14 42" stroke="#10263a" stroke-width="3.5" stroke-linecap="round"/>',
+  'Skin Care': '<rect x="22" y="20" width="20" height="32" rx="5" fill="#fff" stroke="#10263a" stroke-width="3"/><rect x="26" y="12" width="12" height="8" rx="2" fill="#10263a"/>',
+  'Baby & Mom': '<circle cx="32" cy="28" r="12" fill="#fff" stroke="#10263a" stroke-width="3"/><path d="M20 52c2-8 22-8 24 0" stroke="#10263a" stroke-width="3" fill="none"/>',
+  'Medical Devices': '<path d="M10 34h12l5-12 8 22 5-10h14" stroke="#10263a" stroke-width="3.5" fill="none" stroke-linejoin="round"/>',
+  'First Aid': '<rect x="12" y="18" width="40" height="30" rx="5" fill="#fff" stroke="#10263a" stroke-width="3"/><path d="M28 26h8v4h4v8h-4v4h-8v-4h-4v-8h4z" fill="#10263a"/>',
+  'Prescription': '<rect x="16" y="12" width="32" height="40" rx="4" fill="#fff" stroke="#10263a" stroke-width="3"/><text x="32" y="40" font-size="16" font-weight="700" text-anchor="middle" fill="#10263a" font-family="sans-serif">Rx</text>',
 };
 const icon = cat => `<svg viewBox="0 0 64 64" aria-hidden="true">${ICONS[cat] || ICONS['First Aid']}</svg>`;
 

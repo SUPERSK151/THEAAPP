@@ -6,10 +6,13 @@
   <title>Diamond Health — Your online health shop</title>
   <meta name="description" content="Diamond Health: vitamins, wellness, skin care and everyday health essentials delivered across South Africa.">
   <link rel="icon" href="/img/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Figtree:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="topbar">Free delivery on orders over R500 · Delivering across South Africa</div>
+  <div class="topbar">Free delivery on orders over R500, anywhere in South Africa</div>
 
   <header class="site-header">
     <div class="wrap header-row">
@@ -30,20 +33,42 @@
     <section class="hero">
       <div class="wrap hero-inner">
         <div>
-          <h1>Everyday health, delivered.</h1>
-          <p>Vitamins, wellness, skin care and family health essentials from Diamond Health, sent straight to your door.</p>
-          <a href="#products" class="btn btn-primary">Shop now</a>
+          <h1>Health, cut with care.</h1>
+          <p>Vitamins, skin care, first aid and everyday medicines, delivered to your door anywhere in South Africa.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="button" onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">Browse the shop</button>
+            <button class="btn" type="button" onclick="me ? (location.hash = '#account') : openAuth('register')">Create an account</button>
+          </div>
         </div>
-        <ul class="hero-points">
-          <li><b>Pharmacist support</b><span>Questions about a product? Ask us.</span></li>
-          <li><b>Secure accounts</b><span>Your details are protected under POPIA.</span></li>
-          <li><b>Fast delivery</b><span>Nationwide courier, 2–4 working days.</span></li>
-        </ul>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 400 360">
+            <g class="facets">
+              <polygon class="facet-fill light" points="40,120 130,40 110,120"/>
+              <polygon class="facet-fill deep" points="110,120 130,40 200,120"/>
+              <polygon class="facet-fill" points="200,120 130,40 270,40"/>
+              <polygon class="facet-fill light" points="200,120 270,40 290,120"/>
+              <polygon class="facet-fill deep" points="290,120 270,40 360,120"/>
+              <polygon class="facet-fill" points="40,120 110,120 200,330"/>
+              <polygon class="facet-fill light" points="110,120 200,120 200,330"/>
+              <polygon class="facet-fill deep" points="200,120 290,120 200,330"/>
+              <polygon class="facet-fill" points="290,120 360,120 200,330"/>
+            </g>
+            <path class="facet-line" d="M40 120 L130 40 L270 40 L360 120 L200 330 Z M40 120 H360 M130 40 L110 120 L200 330 M130 40 L200 120 L270 40 M270 40 L290 120 L200 330 M200 120 V330"/>
+          </svg>
+        </div>
       </div>
     </section>
+    <div class="promises">
+      <div><b>A pharmacist on hand</b><span>Questions about a product? Email us before you buy.</span></div>
+      <div><b>Your details stay private</b><span>Accounts are protected and handled under POPIA.</span></div>
+      <div><b>Delivered in 2 to 4 days</b><span>Nationwide courier, free on orders over R500.</span></div>
+    </div>
 
     <section class="wrap" id="products">
-      <div class="chips" id="categories"></div>
+      <div class="shop-head">
+        <h2>The shop</h2>
+        <div class="chips" id="categories"></div>
+      </div>
       <div class="grid" id="productGrid"></div>
       <p id="emptyMsg" class="muted center" hidden>No products match your search.</p>
     </section>
@@ -52,7 +77,7 @@
   <!-- ACCOUNT -->
   <main id="view-account" class="view" hidden>
     <section class="wrap narrow">
-      <h1>My account</h1>
+      <h1>Your account</h1>
       <p class="muted">Keep your details up to date so we can deliver your orders.</p>
       <form id="profileForm" class="card form">
         <h2>Personal details</h2>
@@ -108,7 +133,7 @@
 
   <footer class="site-footer">
     <div class="wrap footer-row">
-      <div><b>Diamond Health</b><br><span class="muted">diamondhealth.co.za</span></div>
+      <div><span class="footer-brand">Diamond <i>Health</i></span><br><span class="muted">diamondhealth.co.za</span></div>
       <div><a href="/privacy">Privacy notice (POPIA)</a><br><a href="mailto:hello@diamondhealth.co.za">hello@diamondhealth.co.za</a></div>
       <div class="muted small">Information on this site is not a substitute for advice from a doctor or pharmacist. Always read the label.</div>
     </div>
