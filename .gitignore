@@ -1,0 +1,8 @@
+# Customer database — never commit personal information
+data/
+*.db
+*.db-journal
+
+node_modules/
+.env
+.DS_Store

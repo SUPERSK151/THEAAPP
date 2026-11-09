@@ -1,0 +1,12 @@
+{
+  "name": "diamond-health",
+  "version": "1.0.0",
+  "description": "Diamond Health — online health shop (diamondhealth.co.za)",
+  "main": "server.js",
+  "private": true,
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "start": "node --no-warnings server.js",
+    "dev": "node --no-warnings --watch server.js"
+  }
+}
