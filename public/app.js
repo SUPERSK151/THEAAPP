@@ -174,7 +174,7 @@ function openCheckout() {
       if (location.hash === '#account') showAccount();
       products = await api('/api/products'); renderProducts();
       $('#checkoutBody').innerHTML = `<p style="font-size:1.1rem">Thank you! Order <b>#${r.order_id}</b> (${rand(r.total_cents)}) has been placed.</p>
-        <p class="muted">We'll email you payment and delivery details shortly.</p>
+        <p class="muted">A confirmation with payment details is on its way to ${esc(me.email)}.</p>
         <a href="#account" class="btn btn-primary" data-close>View my orders</a>`;
     } catch (err) { const m = $('#checkoutMsg'); m.textContent = err.message; m.className = 'msg err'; }
   };

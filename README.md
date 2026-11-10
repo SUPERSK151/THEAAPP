@@ -34,6 +34,22 @@ Edit **`products.json`**. Each product looks like:
 - `requires_prescription: true` shows the product as "Prescription only" — it can't be added to the cart.
 - Restart the server after editing; the catalogue reloads on start. Removing a product from the file hides it from the shop.
 
+## Order emails
+
+When a customer places an order, two emails go out: a confirmation to the customer (with EFT banking details and a payment reference like `DH12`), and a new-order alert to the shop. Emails are sent through [Resend](https://resend.com) — no packages needed.
+
+Set these in Render → your service → **Environment**:
+
+| Variable | Example |
+|---|---|
+| `RESEND_API_KEY` | `re_xxxxxxxx` (from resend.com → API Keys) |
+| `MAIL_FROM` | `Diamond Health <orders@diamondhealth.co.za>` |
+| `SHOP_EMAIL` | `orders@yourshop.co.za` (comma-separate for more than one) |
+| `EFT_DETAILS` | `FNB · Diamond Health (Pty) Ltd\nAccount 62000000000 · Branch 250655` (`\n` = new line) |
+| `SITE_URL` | `https://diamondhealth.co.za` |
+
+Without `RESEND_API_KEY` (e.g. on your own computer) the emails are printed in the terminal instead of sent. A failed email never stops an order from going through; check the Render logs if one goes missing.
+
 ## Customer database
 
 Stored in `data/diamondhealth.db` (SQLite, created automatically). Tables: `customers`, `sessions`, `products`, `orders`, `order_items`.

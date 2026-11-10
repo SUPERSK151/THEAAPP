@@ -7,6 +7,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
 const { DatabaseSync } = require('node:sqlite');
+const { sendOrderEmails } = require('./mailer');
 
 const PORT = process.env.PORT || 3000;
 const ADMIN_KEY = process.env.ADMIN_KEY || ''; // set this to enable /api/admin/*
@@ -247,6 +248,7 @@ async function api(req, res, url) {
     const subtotal = lines.reduce((s, l) => s + l.p.price_cents * l.qty, 0);
     const delivery = subtotal >= FREE_DELIVERY_FROM_CENTS ? 0 : DELIVERY_FEE_CENTS;
     const address = [me.address_line1, me.address_line2, me.suburb, me.city, me.province, me.postal_code].filter(Boolean).join(', ');
+    let orderId;
     db.exec('BEGIN');
     try {
       const o = db.prepare(`INSERT INTO orders (customer_id, payment_method, delivery_address, subtotal_cents, delivery_cents, total_cents, notes)
@@ -254,9 +256,15 @@ async function api(req, res, url) {
       const addItem = db.prepare('INSERT INTO order_items (order_id, product_id, name, unit_price_cents, quantity) VALUES (?, ?, ?, ?, ?)');
       const dec = db.prepare('UPDATE products SET stock = stock - ? WHERE id = ?');
       for (const l of lines) { addItem.run(o.lastInsertRowid, l.p.id, l.p.name, l.p.price_cents, l.qty); dec.run(l.qty, l.p.id); }
+      orderId = Number(o.lastInsertRowid);
       db.exec('COMMIT');
-      return send(res, 201, { order_id: Number(o.lastInsertRowid), total_cents: subtotal + delivery });
     } catch (e) { db.exec('ROLLBACK'); throw e; }
+    send(res, 201, { order_id: orderId, total_cents: subtotal + delivery });
+    // Email the customer and the shop after replying, so checkout never waits on (or fails because of) email.
+    const order = db.prepare('SELECT * FROM orders WHERE id = ?').get(orderId);
+    order.items = db.prepare('SELECT name, unit_price_cents, quantity FROM order_items WHERE order_id = ?').all(orderId);
+    sendOrderEmails(order, me).catch(console.error);
+    return;
   }
 
   // ----- admin (requires ADMIN_KEY env + x-admin-key header) -----
